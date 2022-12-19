@@ -1,5 +1,7 @@
 # TTM Potential for Python
 
+[![CI](https://github.com/exalearn/python-ttm/actions/workflows/python-app.yml/badge.svg)](https://github.com/exalearn/python-ttm/actions/workflows/python-app.yml)
+
 This directory contains a Python wrapper for the TTM interaction potential for water.
 
 The TTM wrapper was originally developed by Joseph Heindel and packaged for distribution by Logan Ward.
