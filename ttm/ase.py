@@ -37,4 +37,4 @@ class TTMCalculator(Calculator):
         ttm = TTM(self.parameters.model)
         energy, gradients = ttm.evaluate(atoms.get_positions())
         self.results['energy'] = energy * units.kcal / units.mol
-        self.results['forces'] = -gradients * units.kcal / units.mol
+        self.results['forces'] = gradients * units.kcal / units.mol

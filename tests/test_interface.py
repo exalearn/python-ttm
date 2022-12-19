@@ -30,7 +30,7 @@ def hexamer() -> (np.ndarray, float, np.ndarray):
                           [-2.29024563, 0.26724676, -0.65069518],
                           [-3.66545029, 0.50362404, 0.03495814]])
     energy = -44.00990
-    forces = np.array([[-17.171631, -8.501426, -1.129756],
+    gradients = np.array([[-17.171631, -8.501426, -1.129756],
                        [15.737880, -5.080882, -0.557946],
                        [4.148115, 11.227446, 2.146692],
                        [-14.176072, 2.584080, -5.868841],
@@ -48,7 +48,7 @@ def hexamer() -> (np.ndarray, float, np.ndarray):
                        [3.244097, -13.576127, 8.849190],
                        [7.953128, 6.482030, -11.249730],
                        [-9.442338, 7.039638, 0.516085]])
-    return positions, energy, forces
+    return positions, energy, -gradients
 
 
 def test_hexamer(hexamer):
@@ -57,7 +57,7 @@ def test_hexamer(hexamer):
     energy, gradients = ttm21f.evaluate(cage_hexamer)
 
     assert np.isclose(energy, -44.00990)
-    assert np.isclose(-gradients, known_forces, atol=1e-6).sum() == 18 * 3
+    assert np.isclose(gradients, known_forces, atol=1e-6).sum() == 18 * 3
 
 
 def test_ase(hexamer):
@@ -72,3 +72,7 @@ def test_ase(hexamer):
 
     forces = calc.get_forces(atoms)
     assert np.isclose(forces, known_forces * units.kcal / units.mol, atol=1e-6).all()
+
+    atoms.set_calculator(calc)
+    num_forces = calc.calculate_numerical_forces(atoms)
+    assert np.isclose(num_forces, forces, atol=1e-4).all()
