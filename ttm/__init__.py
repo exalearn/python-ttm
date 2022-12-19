@@ -3,7 +3,6 @@
 Author: Joseph Heindel
 """
 
-import sys
 import numpy as np
 
 

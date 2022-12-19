@@ -4,14 +4,14 @@ from ttm import TTM
 
 
 class TTMCalculator(Calculator):
-    """ASE interface to TTM library. 
-    
-    Capable of computing molecular
-    
+    """ASE interface to TTM library.
+
+    Capable of computing molecular interactions for water using several versions of the TTM potential
+
     Parameters
     ----------
     model: int
-        Which version of the TTM potential to use. 
+        Which version of the TTM potential to use.
         Possible values are: 2, 21 (standing for 2.1), and 3
     """
 
